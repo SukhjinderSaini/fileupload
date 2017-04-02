@@ -1,0 +1,7 @@
+<h2>Upload Files ...</h2>
+
+<div ng-controller="fileUpload">
+<div>{{uploadMessage}}</div>
+<input type="file" id="fileinput" name="fileinput" upload-files="UploadFile" accept="image/*,doc,docs" />
+<button ng-click="uploadFiles()" value="Upload Files"></button>
+</div>
