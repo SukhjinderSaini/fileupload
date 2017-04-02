@@ -1,10 +1,10 @@
 var myapp = angular.module("myapp",["ngRoute"]);
 myapp.config(function($routeProvider) {
     $routeProvider
-    .when("#uploadFiles", {
+    .when("/#uploadFiles", {
         templateUrl : "fileupload.html"
     })
-    .when("#listFiles", {
+    .when("/#listFiles", {
         templateUrl : "viewUpload.html"
     })
     .otherwise({
