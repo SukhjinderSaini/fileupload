@@ -1,9 +1,13 @@
-<h2>View Upload Files ...</h2>
+<h2>List Uploaded Files ...</h2>
+<div class="container" ng-controller="viewFiles">
+	<div class="col-md-12"><h1 class="success">{{uploadMessage}}</h1></div>
+    <div class="col-md-6">
+   
+	<table class="table table-striped">
 
-<div ng-controller="viewFiles">
+	<tr ng-repeat="filename in allFiles"><td>{{filename}}</td></tr>
+	</table>
+    <div class="col-md-6"></div>
 
-	<ul>
-	<li ng-repeat="filename in allFiles">{{filename}}</li>
-	</ul>
 
 </div>

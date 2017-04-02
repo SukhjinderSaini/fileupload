@@ -1,5 +1,16 @@
 <?php
-$dir    = '/uploadedFiles';
-$files1 = scandir($dir);
-print_r($files1);
-?>
+$dir    = './uploadedFiles/';
+
+$allFiles = array_values(array_diff(scandir($dir), array('..', '.')));
+
+$jsObj = "[";
+
+foreach($allFiles as $key=>$value){
+
+ $jsObj = $jsObj. '"' .$value .'",';
+
+ }
+ $jsObj = rtrim($jsObj,',');
+
+ echo $jsObj .= "]";
+ ?>

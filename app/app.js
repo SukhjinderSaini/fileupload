@@ -1,10 +1,10 @@
 var myapp = angular.module("myapp",["ngRoute"]);
 myapp.config(function($routeProvider) {
     $routeProvider
-    .when("/#uploadFiles", {
+    .when("/uploadFiles", {
         templateUrl : "fileupload.html"
     })
-    .when("/#listFiles", {
+    .when("/listFiles", {
         templateUrl : "viewUpload.html"
     })
     .otherwise({
@@ -12,67 +12,63 @@ myapp.config(function($routeProvider) {
     });
 });
 
-myApp.directive('uploadFiles', ['$parse', function ($parse) {
+myapp.directive('uploadFiles', ['$parse', function ($parse) {
             return {
                restrict: 'A',
-               link: function(scope, element, attrs) {
+               link: function($scope, element, attrs) {
                   var model = $parse(attrs.uploadFiles);
                   var modelSetter = model.assign;
                   
                   element.bind('change', function(){
-                     scope.$apply(function(){
-                        modelSetter(scope, element[0].files[0]);
+                     $scope.$apply(function(){
+                        modelSetter($scope, element[0].files[0]);
                      });
                   });
                }
             };
          }]);
 
-myapp.controller("viewFiles",['$scope','listFiles',function(scope,listFiles){
+myapp.controller("viewFiles",['$scope','$http',function($scope,$http){
 	
-		scope.fileList ="/getFiles";
-		scope.allFiles = listFiles.ListFiles();
+		$scope.fileList ="./listFiles.php";
+		$http.get($scope.fileList).then(function(info){
+				
+			$scope.allFiles = info.data;
+		
+		});
 
 }])
 
-myapp.service("uploadService",["$https:",function($https:){
+myapp.service("uploadService",["$http",function($http){
 
          this.uploadFileToUrl = function(file, uploadUrl){
                var fd = new FormData();
                fd.append('file', file);
             
-              return $https:.post(uploadUrl, fd, {
+              return $http.post(uploadUrl, fd, {
                   transformRequest: angular.identity,
                   headers: {'Content-Type': undefined}
                })
 			}
          }]);
-})
 
-myapp.service("listFiles",function(){
-	
-			this.ListFiles = function(){
-			return 	$https:.get(fileList)		
-			}
-			
-})
+
 
          
-myapp.controller("fileUpload",['$scope','uploadService',function(scope,uploadService){
+myapp.controller("fileUpload",['$scope','uploadService',function($scope,uploadService){
             $scope.uploadFiles = function(){
                var file = $scope.UploadFile;
-               var uploadUrl = "/fileUpload";
-               var uploaderInfo = fileUpload.uploadFileToUrl(file, uploadUrl);
-			   uploaderInfo.success(function(){
-					scope.uploadMessage = "Uploaded Successfully.";
+               var uploadUrl = "./uploadFiles.php";
+               var uploaderInfo = uploadService.uploadFileToUrl(file, uploadUrl);
+			   uploaderInfo.then(function(info){
+					$scope.uploadMessage = info.data;
 					
 			   });
 			   uploaderInfo.error(function(){
-					scope.uploadMessage = "Error in uploading file.";
+					$scope.uploadMessage = "Error in uploading file.";
 					
 			   });
 			   
 				
-			   })
-            };
+			};
          }]);

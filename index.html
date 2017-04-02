@@ -8,16 +8,20 @@
 	<script type="text/javascript" src="app/js/angular.min.js"></script>
 	<script type="text/javascript" src="app/js/angular-route.min.js"></script>
 	<script src="app/app.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="app/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body ng-app="myapp">
-<ul class="nav navbar-nav">
-<li class="active"><a href="/uploadFiles">Upload Files</li>
-<li><a href="/listFiles">List Files</li>
-</ul>
+
+<div class="container">
+<nav>
+<a href="#uploadFiles">Upload Files</a> || <a href="#listFiles">List Files</a>
+</nav>
+
+<div style="padding-top:100px">
 
 <div ng-view></div>
 
+</div>
+</div>
 </body>
 </html>

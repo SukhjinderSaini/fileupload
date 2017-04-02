@@ -1,7 +1,15 @@
-<h2>Upload Files ...</h2>
+<h2>Upload Files</h2>
 
-<div ng-controller="fileUpload">
-<div>{{uploadMessage}}</div>
-<input type="file" id="fileinput" name="fileinput" upload-files="UploadFile" accept="image/*,doc,docs" />
-<button ng-click="uploadFiles()" value="Upload Files"></button>
+<div class="container" ng-controller="fileUpload">
+	<div class="col-md-12"><h1 class="success">{{uploadMessage}}</h1></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" id="fileinput" name="fileinput" upload-files="UploadFile" accept="image/*" />
+            <p style="text-align: right; margin-top: 20px;">
+                <input type="submit" ng-click="uploadFiles()" value="Upload Files" class="btn btn-lg btn-primary" />
+            </p>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
 </div>

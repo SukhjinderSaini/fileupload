@@ -1,0 +1,22 @@
+<html>
+<script>
+
+
+
+function addListener(){
+    
+	Object.keys(Event.prototype).forEach(function(ev) {
+    window.addEventListener(ev.toLowerCase(), function() {
+        console.log('event:', ev)
+    })
+})
+    
+}
+
+
+addListener();
+</script>
+<body>
+Hello
+</body>
+</html>

@@ -1,10 +1,14 @@
-if (isset($_FILES['inputfiles'])) {
-    if(move_uploaded_file($_FILES['inputfiles']['tmp_name'], "uploadedFiles/" . $_FILES['inputfiles']['name'])){
-        echo $_FILES['inputfiles']['name']. " OK";
+<?php
+if (isset($_FILES['file'])) {
+	$filedata = $_FILES["file"];
+
+    if(move_uploaded_file($filedata['tmp_name'], "uploadedFiles/" . $filedata['name'])){
+        echo $filedata['name']. " Uploaded Successfully.";
     } else {
-        echo $_FILES['inputfiles']['name']. " KO";
+        echo $filedata['name']. " Error";
     }
     exit;
 } else {
     echo "No files uploaded ...";
 }
+?>
