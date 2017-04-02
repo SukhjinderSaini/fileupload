@@ -30,7 +30,7 @@ myapp.directive('uploadFiles', ['$parse', function ($parse) {
 
 myapp.controller("viewFiles",['$scope','$http',function($scope,$http){
 	
-		$scope.fileList ="./listFiles.php";
+		$scope.fileList ="http://52.26.127.158/myphp/listFiles.php";
 		$http.get($scope.fileList).then(function(info){
 				
 			$scope.allFiles = info.data;
@@ -58,7 +58,7 @@ myapp.service("uploadService",["$http",function($http){
 myapp.controller("fileUpload",['$scope','uploadService',function($scope,uploadService){
             $scope.uploadFiles = function(){
                var file = $scope.UploadFile;
-               var uploadUrl = "./uploadFiles.php";
+               var uploadUrl = "http://52.26.127.158/myphp/uploadFiles.php";
                var uploaderInfo = uploadService.uploadFileToUrl(file, uploadUrl);
 			   uploaderInfo.then(function(info){
 					$scope.uploadMessage = info.data;
